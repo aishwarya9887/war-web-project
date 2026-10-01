@@ -38,7 +38,7 @@ pipeline {
                     <p>Build Number: ${env.BUILD_NUMBER}</p>
                     <p>Status: SUCCESS</p>
                 """,
-                to: 'YOUR_EMAIL@gmail.com'
+                to: 'aishuwarya1231@gmail.com'
             )
         }
 
@@ -51,7 +51,7 @@ pipeline {
                     <p>Build Number: ${env.BUILD_NUMBER}</p>
                     <p>Status: FAILURE</p>
                 """,
-                to: 'YOUR_EMAIL@gmail.com'
+                to: 'aishuwarya1231@gmail.com'
             )
         }
     }
