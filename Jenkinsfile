@@ -2,25 +2,21 @@ pipeline {
     agent any
 
     tools {
-        maven 'M3'
-    }
-
-    environment {
-        GIT_SSH_CREDENTIALS_ID = 'github-ssh-key' // use your actual ID
+        maven 'MAVEN-HOME'
     }
 
     stages {
+
         stage('Checkout') {
             steps {
-                git credentialsId: "${env.GIT_SSH_CREDENTIALS_ID}",
-                    url: 'git@github.com:your-org/your-private-repo.git',
-                    branch: 'main'
+                git url: 'https://github.com/aishwarya9887/war-web-project.git',
+                    branch: 'master'
             }
         }
 
         stage('Build with Maven') {
             steps {
-                sh 'mvn clean package'
+                bat 'mvn clean package'
             }
         }
 
