@@ -22,8 +22,37 @@ pipeline {
 
         stage('Archive WAR') {
             steps {
-                archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
+                archiveArtifacts artifacts: '**/target/*.war',
+                    fingerprint: true
             }
+        }
+    }
+
+    post {
+        success {
+            emailext(
+                subject: "Jenkins Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+                    <h2>Jenkins Build Successful</h2>
+                    <p>Job: ${env.JOB_NAME}</p>
+                    <p>Build Number: ${env.BUILD_NUMBER}</p>
+                    <p>Status: SUCCESS</p>
+                """,
+                to: 'YOUR_EMAIL@gmail.com'
+            )
+        }
+
+        failure {
+            emailext(
+                subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+                    <h2>Jenkins Build Failed</h2>
+                    <p>Job: ${env.JOB_NAME}</p>
+                    <p>Build Number: ${env.BUILD_NUMBER}</p>
+                    <p>Status: FAILURE</p>
+                """,
+                to: 'YOUR_EMAIL@gmail.com'
+            )
         }
     }
 }
